@@ -1,0 +1,64 @@
+package com.mmt.functional.test.ActivityEngine;
+
+import avro.shaded.com.google.common.collect.MapDifference;
+import avro.shaded.com.google.common.collect.Maps;
+
+import org.testng.collections.Lists;
+
+import java.util.*;
+
+class Student{
+    String name ;
+    int  age;
+     public Student(String name , int age){
+         this.name = name;
+         this.age = age;
+     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Student)) return false;
+        Student student = (Student) o;
+        return age == student.age &&
+                Objects.equals(name, student.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age);
+    }
+}
+
+
+public class MapDIfferenceTWO{
+
+    public static void main(String[] args) {
+
+        Student s1 = new Student("lara",33);
+        Student s2 = new Student("Sachin",32);
+        Student s3 = new Student("billoo",34);
+        Student s4 = new Student("aaru",4);
+
+        HashMap<String , Student> maps = new HashMap<String , Student>();
+        HashMap<String , Student> mapstwo = new HashMap<String , Student>();
+
+        maps.put("1",s1);
+        maps.put("2",s2);
+        maps.put("3",s3);
+        maps.put("4",s4);
+        maps.put("6",s4);
+
+        mapstwo.put("1",s1);
+        mapstwo.put("2",s2);
+        mapstwo.put("3",s3);
+        mapstwo.put("4",s3);
+        mapstwo.put("7",s4);
+
+        MapDifference<String,Student> mapDIfference= Maps.difference(maps,mapstwo);
+
+        mapDIfference.entriesDiffering();  // prints 4 - as value of 4 differing
+        mapDIfference.entriesInCommon();   // 1 , 2 ,3
+        mapDIfference.entriesOnlyOnLeft(); // 6
+        mapDIfference.entriesOnlyOnRight(); // 7
+    }
+}
