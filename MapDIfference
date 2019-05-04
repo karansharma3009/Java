@@ -1,0 +1,65 @@
+import java.util.*;
+
+class Student{
+    String name ;
+    int  age;
+     public Student(String name , int age){
+         this.name = name;
+         this.age = age;
+     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Student)) return false;
+        Student student = (Student) o;
+        return age == student.age &&
+                Objects.equals(name, student.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age);
+    }
+}
+
+
+public class MapDIfference {
+
+    public static void main(String[] args) {
+
+        Student s1 = new Student("lara",33);
+        Student s2 = new Student("Sachin",32);
+        Student s3 = new Student("lara",33);
+
+        System.out.println(s1.equals(s3));
+        System.out.println(s2.equals(s3));
+
+        HashSet<Student > hashSet = new HashSet<Student>();
+        hashSet.add(s1);
+        hashSet.add(s2);
+        hashSet.add(s3);
+        System.out.println(hashSet.size());
+
+        //true
+        //false
+        //3
+        // If we dont overide hash , HashSet is still able to add s1 , s3 as different objects
+        // though they are same as per our equal implementation
+        // because they fell under different Bucket because of different hash and when hashMap used
+        // PUT<K.V> and get<K> it calculate the same on the basis on hashcode .
+        // now overide hashcode and run the same
+
+        HashSet<Student > hashSet2= new HashSet<Student>();
+        hashSet2.add(s1);
+        hashSet2.add(s2);
+        hashSet2.add(s3);
+        System.out.println(hashSet2.size());
+
+       /* true
+        false
+        2
+        2*/
+
+       //  hashSet2.add(s3); returned false this time , because hashcode is also same this time .
+    }
+}
