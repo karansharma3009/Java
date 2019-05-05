@@ -1,0 +1,46 @@
+package com.mmt.functional.test.Test;
+
+import java.util.Arrays;
+
+public class AnagramUsingChracterMap {
+
+    public static void main(String[] args) {
+
+        int a[]  = new int[256];
+        int b[]  = new int[256];
+
+        String one  = "geeksforkaran";
+        String  two = "karanforgeeks";
+
+        Arrays.fill(a,0);
+        Arrays.fill(b,0);
+  int in = 0;
+        for ( int i =0;i<one.length();i++)
+        {
+            a[one.charAt(i)]++;
+            in = one.charAt(i);
+            System.out.println(in);
+        }
+
+        for ( int i =0;i<two.length();i++)
+        {
+            b[two.charAt(i)]++;
+            in = two.charAt(i);
+            System.out.println(in);
+        }
+
+        if( one.length() !=two.length() ) System.out.println("Not an anagram ");
+
+
+        for ( int i =0;i<b.length;i++)
+        {
+             if ( b[i]!=a[i]) {  System.out.println("not and anagram "+i );break;}
+
+        }
+
+
+
+    }
+
+
+}
