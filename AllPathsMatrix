@@ -1,0 +1,46 @@
+//The problem is to count all the possible paths from top left to bottom right
+//of a mXn matrix with the constraints that from each cell you can either move only to right or down
+
+
+public class AllPathsMatrix {
+
+    static int a[][] = { { 1, 2, 3 },
+            { 4, 5, 6 },  { 7, 8, 9 }}; ;
+            static int noOfPaths=0;
+    public static void main(String[] args) {
+
+
+        int i=0,j=0;
+
+        findPath(i,j);
+
+
+        System.out.println("Paths we found -> "+noOfPaths);
+    }
+
+    private static void findPath(int i, int j) {
+        System.out.println(i+"-"+j);
+        if (i==(a.length-1) && j==(a[0].length-1))
+        {
+            System.out.println("reached at end ");
+            noOfPaths++;
+            return;
+        }
+
+        if ( i>(a.length-1) || j>(a[0].length-1)) {
+            System.out.println("returning");
+            return;
+        }
+        System.out.println(a[i][j]);
+        j=j+1;
+        System.out.println("before find path loop 1 " + i+"-"+j);
+        findPath(i,j);
+        i=i+1;
+        j=j-1;  // this line take a shit out of me. If you miss this traversal will be 00 - left child (0,1)- rchild - 1,1 and we need 1,0 instead of 1,1
+        // in case where diagonal movements is also possible - we need ( 1,1) also and we need 3 find paths
+        System.out.println("before find path loop 2" +i+"-"+j);
+        findPath(i, j);
+
+
+    }
+}
