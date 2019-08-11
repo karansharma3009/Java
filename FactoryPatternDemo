@@ -1,0 +1,84 @@
+package Factory;
+
+abstract class Plan {
+
+    protected double rate;
+    abstract void getRate();
+
+    public void generateBill(int units)
+    {
+        System.out.println(rate*units);
+    }
+
+}
+
+
+class corporate extends Plan
+{
+
+
+    void getRate() {
+        rate =3.50;
+    }
+}
+
+class commercial extends Plan
+{
+
+
+    void getRate() {
+        rate =4.50;
+    }
+}
+
+class Aap extends Plan
+{
+   void getRate() {
+        rate =2.0;
+    }
+}
+
+enum PlanTypeEnum
+{
+ Corporate , Commercial, AAP ;
+}
+
+class GetPlanFactory {
+    PlanTypeEnum plantypeen;
+
+    public Plan getPlan(PlanTypeEnum plantypeen) {
+        if (plantypeen == PlanTypeEnum.Commercial) {
+            return new commercial();
+        }
+        if (plantypeen == PlanTypeEnum.AAP) {
+            return new Aap();
+        }
+        if (plantypeen == PlanTypeEnum.Commercial) {
+            return new commercial();
+        }
+        if (plantypeen == PlanTypeEnum.Corporate) {
+            return new corporate();
+        }
+        return null;
+    }
+}
+
+
+public class FactoryPatternDemo
+{
+    public static void main(String[] args) {
+        GetPlanFactory p = new GetPlanFactory();
+        Plan p1 = p.getPlan(PlanTypeEnum.AAP);
+        p1.getRate();
+        p1.generateBill(100);
+
+        Plan p2 = p.getPlan(PlanTypeEnum.Commercial);
+        p2.getRate();
+        p2.generateBill(100);
+
+        Plan p3 = p.getPlan(PlanTypeEnum.Corporate);
+        p3.getRate();
+        p3.generateBill(100);
+
+    }
+}
