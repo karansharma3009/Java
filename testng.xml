@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Automationsuite" parallel="tests">
+    <test name="ChromeTest">
+        <parameter name ="browser" value="Chrome"/>
+        <classes>
+            <class name="wynk.UIClass"/>
+        </classes>
+    </test>
+    <test name="ChromeTest">
+        <parameter name ="browser" value="Firefox"/>
+    <classes>
+       <class name="wynk.UIClass"/>
+    </classes>
+    </test>
+</suite>
